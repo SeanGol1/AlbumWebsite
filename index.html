@@ -15,15 +15,31 @@
     <title>Sign Up</title>
 </head>
 <body>
-    <h1 class="Jumbotron">Sign up to an album a day!</h1><br />
-    <label>Enter Email</label><br />
-    <input type="text" id="txtEmail" /><br />
-    <input type="submit" onclick="AddEmail()" /><br />
-	<p id="txtResp"></p>
+    <div class="container">
+        <h1 class="Jumbotron">Sign up to an album a day!</h1><br />
+        <div class="form-group">
+            <label for="txtEmail">Email address</label>
+            <input type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <button class="btn btn-primary" onclick="AddEmail()" >Join Us</button>
+        <button class="btn btn-primary" onclick="DeleteEmail()">Remove Me</button> 
+        <p id="txtResp"></p>
+    </div>
     <script>
         function AddEmail() {
+            document.getElementById('txtResp').innerHTML = "Adding you now...";
             var website = "https://albumaday.azurewebsites.net/users?email=" + document.getElementById('txtEmail').value;
-            fetch(website);
+            fetch(website).then(response => {
+                document.getElementById('txtResp').innerHTML = response.statusText;
+            });
+        }
+        function DeleteEmail() {
+            document.getElementById('txtResp').innerHTML = "Removing you now...";
+            var website = "https://albumaday.azurewebsites.net/delete?email=" + document.getElementById('txtEmail').value;
+            fetch(website).then(response => {
+                document.getElementById('txtResp').innerHTML = response.statusText;
+            });
         }
     </script>
 </body>
