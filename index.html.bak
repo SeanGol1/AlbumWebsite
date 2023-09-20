@@ -24,6 +24,22 @@
         function AddEmail() {
             var website = "https://albumaday.azurewebsites.net/users?email=" + document.getElementById('txtEmail').value;
             fetch(website);
+
+
+		$.ajax({
+			  type: "POST",
+			  url: "https://localhost:7122/Users/",
+			  data: JSON.stringify({ "email": document.getElementById('txtEmail').value}),
+			  contentType: "application/json",
+			  success: function (result) {
+				document.getElementById('txtResp').innerHTML = result;
+				console.log(result);
+			  },
+			  error: function (result, status) {
+				document.getElementById('txtResp').innerHTML = result;
+				console.log(result);
+			  }
+			});
         }
     </script>
 </body>
