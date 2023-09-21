@@ -14,7 +14,7 @@
     <meta charset="utf-8" />
     <title>Sign Up</title>
 </head>
-<body>
+<body onload="GetList()">
     <div class="container">
         <h1 class="Jumbotron">Sign up to an album a day!</h1><br />
         <div class="form-group">
@@ -22,6 +22,9 @@
             <input type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp" placeholder="Enter email">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
+
+        <ol id="myList">
+        </ol>
         <button class="btn btn-primary" onclick="AddEmail()" >Join Us</button>
         <button class="btn btn-primary" onclick="DeleteEmail()">Remove Me</button> 
         <p id="txtResp"></p>
@@ -40,6 +43,25 @@
             fetch(website).then(response => {
                 document.getElementById('txtResp').innerHTML = response.statusText;
             });
+        }
+        function GetList() {
+            fetch('https://albumaday.azurewebsites.net/GetUserList')
+                .then(function (response) {
+                    return response.json()
+                })
+                .then((data) => {
+                    var list = document.getElementById("myList");
+                    data.results.forEach((item) => {
+                        displayList.push(item.name);
+                        let li = document.createElement("li");
+                        li.innerText = item.name;
+                        list.appendChild(li);
+                    })
+                    console.log(displayList)
+                })
+                .catch((err) => {
+                    console.log(`Error fetching: ${err}`)
+                });
         }
     </script>
 </body>
