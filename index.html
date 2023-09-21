@@ -23,8 +23,7 @@
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
 
-        <ol id="myList">
-        </ol>
+        <ul id="myList"></ul>
         <button class="btn btn-primary" onclick="AddEmail()" >Join Us</button>
         <button class="btn btn-primary" onclick="DeleteEmail()">Remove Me</button> 
         <p id="txtResp"></p>
@@ -45,19 +44,19 @@
             });
         }
         function GetList() {
-            fetch('https://albumaday.azurewebsites.net/GetUserList')
+            let userList = [];
+            fetch("https://albumaday.azurewebsites.net/GetUserList")
                 .then(function (response) {
-                    return response.json()
+                    return response.json();
                 })
                 .then((data) => {
                     var list = document.getElementById("myList");
-                    data.results.forEach((item) => {
-                        displayList.push(item.name);
+                    data.forEach((item) => {
+                        userList.push(item);
                         let li = document.createElement("li");
-                        li.innerText = item.name;
+                        li.innerText = item;
                         list.appendChild(li);
                     })
-                    console.log(displayList)
                 })
                 .catch((err) => {
                     console.log(`Error fetching: ${err}`)
