@@ -46,14 +46,14 @@
     <script>
         function AddEmail() {
             document.getElementById('txtResp').innerHTML = "Adding you now...";
-            var website = "https://albumaday.azurewebsites.net/users?email=" + document.getElementById('txtEmail').value;
+            var website = "https://albumaday.azurewebsites.net/addemail?email=" + document.getElementById('txtEmail').value;
             fetch(website).then(response => {
                 document.getElementById('txtResp').innerHTML = response.statusText;
             });
         }
         function DeleteEmail() {
             document.getElementById('txtResp').innerHTML = "Removing you now...";
-            var website = "https://albumaday.azurewebsites.net/delete?email=" + document.getElementById('txtEmail').value;
+            var website = "https://albumaday.azurewebsites.net/deleteemail?email=" + document.getElementById('txtEmail').value;
             fetch(website).then(response => {
                 document.getElementById('txtResp').innerHTML = response.statusText;
             });
