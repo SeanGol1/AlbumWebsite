@@ -32,9 +32,9 @@
             <img src="album-logo.png" width="300px" height="300px"/>
             <h1 class="Jumbotron">Sign up to an album a day!</h1>
             <h1>Is it correct that you WOULDN'T NOT HATE to NOT be unsubscribed from the list?</h1>
-            <button class="btn btn-primary" onclick="">Yes</button>
+            <button class="btn btn-primary" onclick="GoHome()">Yes</button>
             <button class="btn btn-primary" onclick="DeleteEmail()">No</button>
-            <button class="btn btn-primary" onclick="">Maybe</button>
+            <button class="btn btn-primary" onclick="MaybeClick()">Maybe</button>
         </div>
         <div class="col-md-6">
             <img src="album_image.jpg" alt="album_image" />
@@ -58,6 +58,14 @@
                     console.log(response.text());
                 })
                 .catch(err => console.error(err));
+        }
+
+        function MaybeClick(){
+            alert("JUST MAKE UP YOUR MIND ALREADY!");
+        }
+
+        function GoHome(){
+            Response.redirect("/index.html");
         }
     </script>
 </body>
